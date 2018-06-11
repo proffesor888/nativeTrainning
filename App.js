@@ -3,11 +3,13 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 //import User from './src/components/User';
 import CityList from './src/components/CityList';
 import icon from "./src/assets/Small-world-network-example.png";
+import ModalScreen from "./src/components/ModalScreen";
 
 export default class App extends React.Component {
   state = {
     cities: [],
     userInput: "",
+    selectedItem: null,
   };
   changeText = e => {
     this.setState({userInput: e});
@@ -17,9 +19,17 @@ export default class App extends React.Component {
     mas.push({key: Math.random(), value: this.state.userInput});
     this.setState({userInput: "", cities: mas});
   };
+  chooseCity = (city) => {
+    this.setState({selectedItem: city});
+    //const cityList = this.state.cities.filter(item => item.value != city);
+    //this.setState({cities: cityList});
+  }
+  closeModal = () => {
+    this.setState({selectedItem: null});
+  }
   deleteCity = (city) => {
     const cityList = this.state.cities.filter(item => item.value != city);
-    this.setState({cities: cityList});
+    this.setState({cities: cityList, selectedItem: null});
   }
   render() {
     return (
@@ -38,7 +48,8 @@ export default class App extends React.Component {
               onPress={this.addCity}
             />
           </View>
-          <CityList deleteCity={this.deleteCity} icon={icon} style={styles.cities} cities={this.state.cities}/>
+          <CityList chooseCity={this.chooseCity} icon={icon} style={styles.cities} cities={this.state.cities}/>
+          <ModalScreen image={icon} deleteCity={this.deleteCity} close={this.closeModal} show={this.state.selectedItem}/>
         </View>
       </View>
     );

@@ -2,7 +2,7 @@ import React from "react";
 import {View, Text, StyleSheet, ScrollView, FlatList, Image} from "react-native";
 
 const CityList = (props) => {
-	const {cities, deleteCity, icon} = props;
+	const {cities, chooseCity, icon} = props;
 	return (
 		<View style={styles.cityContainer}>
 		<FlatList
@@ -14,7 +14,7 @@ const CityList = (props) => {
 				<Image source={icon} style={{width: 30, height: 30}}/>
 				<Text 
 				style={styles.cities}
-				onPress={() => deleteCity(info.item.value)}
+				onPress={() => chooseCity(info.item.value)}
 				>
 				{info.item.value}
 				</Text>
