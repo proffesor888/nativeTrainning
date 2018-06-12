@@ -18,8 +18,10 @@ const ModalScreen = (props: Props) => {
 		visible={show != null}
 		animationType="slide"
 		onRequestClose={close}>
-			<Image source={image} style={styles.image}/>
-			{renderText}
+			<View style={styles.imageContainer}>
+				<Image source={image} style={styles.image}/>
+			</View>
+				{renderText}
 			<View>
 				<Button 
 				title="delete"
@@ -34,12 +36,17 @@ const ModalScreen = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
+	imageContainer: {
+		flexDirection: 'row',
+		//flex: 1,
+		justifyContent: 'center',
+	},
 	image: {
 		//flex: 1,
 		//flexDirection: 'row',
 		//width: 100,
-		height: 30,
-		marginTop: 10,
+		height: 90,
+		marginTop: 90,
 	}
 })
 
