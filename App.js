@@ -1,33 +1,43 @@
-import React from 'react';
+//@flow
+
+import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 //import User from './src/components/User';
 import CityList from './src/components/CityList';
 import icon from "./src/assets/Small-world-network-example.png";
 import ModalScreen from "./src/components/ModalScreen";
 
-export default class App extends React.Component {
+type Props = { /* ... */ };
+
+type State = {
+  cities: Array<{key: number, value: string}>,
+  userInput:any,
+  selectedItem:string|null,
+};
+
+export default class App extends Component<Props, State> {
   state = {
     cities: [],
     userInput: "",
     selectedItem: null,
   };
-  changeText = e => {
+  changeText = (e: KeyboardEvent & {target: HTMLInputElement}) => {
     this.setState({userInput: e});
   };
-  addCity = () => {
+  addCity = (): void => {
     let mas = [...this.state.cities];
     mas.push({key: Math.random(), value: this.state.userInput});
     this.setState({userInput: "", cities: mas});
   };
-  chooseCity = (city) => {
+  chooseCity = (city:string): void => {
     this.setState({selectedItem: city});
     //const cityList = this.state.cities.filter(item => item.value != city);
     //this.setState({cities: cityList});
   }
-  closeModal = () => {
+  closeModal = (): void => {
     this.setState({selectedItem: null});
   }
-  deleteCity = (city) => {
+  deleteCity = (city:string): void => {
     const cityList = this.state.cities.filter(item => item.value != city);
     this.setState({cities: cityList, selectedItem: null});
   }

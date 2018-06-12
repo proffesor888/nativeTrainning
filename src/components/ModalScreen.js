@@ -1,7 +1,16 @@
+//@flow
+
 import React from 'react';
 import { Modal, View, Button, Text, Image, StyleSheet} from 'react-native';
 
-const ModalScreen = props => {
+type Props = {
+	deleteCity(str:string): void,
+	show:string|any,
+	image: any,
+	close():void,
+};
+
+const ModalScreen = (props: Props) => {
 	const {show, close, deleteCity, image} = props;
 	const renderText = show !== null ? <Text>{show}</Text> : null;
 	return (

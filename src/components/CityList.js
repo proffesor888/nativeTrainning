@@ -1,7 +1,16 @@
+//@flow
+
 import React from "react";
 import {View, Text, StyleSheet, ScrollView, FlatList, Image} from "react-native";
 
-const CityList = (props) => {
+type Props = {
+	cities: Array<{key: number, value: string}>,
+	chooseCity(str:string):void,
+	icon: any
+};
+
+
+const CityList = (props: Props) =>  {
 	const {cities, chooseCity, icon} = props;
 	return (
 		<View style={styles.cityContainer}>
